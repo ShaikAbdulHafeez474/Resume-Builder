@@ -1,0 +1,37 @@
+# Node modules (in any folder)
+node_modules/
+
+# Environment variables (in any folder)
+*.env
+.env.*
+
+# Logs
+*.log
+logs
+logs/*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build artifacts
+dist/
+build/
+.cache/
+
+# IDE/Editor settings
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+*.seed
+*.pid.lock
+
+# Optional: Ignore coverage reports
+coverage/
+
