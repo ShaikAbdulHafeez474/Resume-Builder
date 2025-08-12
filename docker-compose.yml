@@ -1,20 +1,30 @@
-version: '3.8'
+
 
 services:
   auth-service:
     build: ./auth-service
-    ports:
-      - "5000:5000"
+    expose:
+      - "5000"
 
   ai-service:
     build: ./ai-service
-    ports:
-      - "5001:5001"
+    expose:
+      - "5001"
 
   analytics-service:
     build: ./analytics-service
-    ports:
-      - "5002:5002"
+    expose:
+      - "5002"
+
+  resume-service:
+    build: ./resume-service
+    expose:
+      - "5004"
+
+  template-service:
+    build: ./template-service
+    expose:
+      - "5005"
 
   api-gateway:
     build: ./api-gateway
@@ -26,14 +36,3 @@ services:
       - analytics-service
       - resume-service
       - template-service
-      #this makes sure all these services starts before the api-gateway
-
-  resume-service:
-    build: ./resume-service
-    ports:
-      - "5004:5004"
-
-  template-service:
-    build: ./template-service
-    ports:
-      - "5005:5005"
