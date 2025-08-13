@@ -3,33 +3,63 @@
 services:
   auth-service:
     build: ./auth-service
-    expose:
-      - "5000"
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./auth-service:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
 
   ai-service:
     build: ./ai-service
-    expose:
-      - "5001"
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./ai-service:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
 
   analytics-service:
     build: ./analytics-service
-    expose:
-      - "5002"
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./analytics-service:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
 
   resume-service:
     build: ./resume-service
-    expose:
-      - "5004"
+    ports:
+      - "5004:5004"
+    volumes:
+      - ./resume-service:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
 
   template-service:
     build: ./template-service
-    expose:
-      - "5005"
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./template-service:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
 
   api-gateway:
     build: ./api-gateway
     ports:
       - "5003:5003"
+    volumes:
+      - ./api-gateway:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
     depends_on:
       - auth-service
       - ai-service
