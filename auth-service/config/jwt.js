@@ -1,6 +1,6 @@
 
 const jwt = require('jsonwebtoken');
-
+require('dotenv').config();
 const signAccessToken = (userId) =>
   jwt.sign({ sub: String(userId), type: 'access' }, process.env.JWT_ACCESS_SECRET, {
     expiresIn: process.env.ACCESS_TOKEN_TTL || '15m',

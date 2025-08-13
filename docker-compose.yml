@@ -3,66 +3,81 @@
 services:
   auth-service:
     build: ./auth-service
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./auth-service:/usr/src/app
-      - /usr/src/app/node_modules
-    environment:
-      - NODE_ENV=development
+    expose : 
+     - "5000"  
+    # volumes:
+    #   - ./auth-service:/usr/src/app
+    #   - auth-node-modules:/usr/src/app/node_modules
+    # environment:
+    #   - NODE_ENV=development
+    # No ports mapping to host
+    # Internal port declared in Dockerfile with EXPOSE 5000
 
   ai-service:
     build: ./ai-service
-    ports:
-      - "5001:5001"
-    volumes:
-      - ./ai-service:/usr/src/app
-      - /usr/src/app/node_modules
-    environment:
-      - NODE_ENV=development
+    expose : 
+     - "5001"  
+    # volumes:
+    #   - ./ai-service:/usr/src/app
+    #   - ai-node-modules:/usr/src/app/node_modules
+    # environment:
+    #   - NODE_ENV=development
+    # EXPOSE 5001 in Dockerfile
 
   analytics-service:
     build: ./analytics-service
-    ports:
-      - "5002:5002"
-    volumes:
-      - ./analytics-service:/usr/src/app
-      - /usr/src/app/node_modules
-    environment:
-      - NODE_ENV=development
+    expose : 
+     - "5002"  
+    # volumes:
+    #   - ./analytics-service:/usr/src/app
+    #   - analytics-node-modules:/usr/src/app/node_modules
+    # environment:
+    #   - NODE_ENV=development
+    # EXPOSE 5002 in Dockerfile
 
   resume-service:
     build: ./resume-service
-    ports:
-      - "5004:5004"
-    volumes:
-      - ./resume-service:/usr/src/app
-      - /usr/src/app/node_modules
-    environment:
-      - NODE_ENV=development
+    expose : 
+     - "5004"  
+    # volumes:
+    #   - ./resume-service:/usr/src/app
+    #   - resume-node-modules:/usr/src/app/node_modules
+    # environment:
+    #   - NODE_ENV=development
+    # EXPOSE 5004 in Dockerfile
 
   template-service:
     build: ./template-service
-    ports:
-      - "5005:5005"
-    volumes:
-      - ./template-service:/usr/src/app
-      - /usr/src/app/node_modules
-    environment:
-      - NODE_ENV=development
+    expose : 
+     - "5005"  
+    # volumes:
+    #   - ./template-service:/usr/src/app
+    #   - template-node-modules:/usr/src/app/node_modules
+    # environment:
+    #   - NODE_ENV=development
+    # EXPOSE 5005 in Dockerfile
 
   api-gateway:
     build: ./api-gateway
     ports:
-      - "5003:5003"
-    volumes:
-      - ./api-gateway:/usr/src/app
-      - /usr/src/app/node_modules
-    environment:
-      - NODE_ENV=development
+      - "5003:5003"  # Only gateway exposed to host
+    # volumes:
+    #   - ./api-gateway:/usr/src/app
+    #   - api-node-modules:/usr/src/app/node_modules
+    # environment:
+    #   - NODE_ENV=development
     depends_on:
       - auth-service
       - ai-service
       - analytics-service
       - resume-service
       - template-service
+    # EXPOSE 5003 in Dockerfile
+
+# volumes:
+#   auth-node-modules:
+#   ai-node-modules:
+#   analytics-node-modules:
+#   resume-node-modules:
+#   template-node-modules:
+#   api-node-modules:
