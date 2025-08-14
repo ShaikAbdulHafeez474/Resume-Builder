@@ -5,6 +5,8 @@ const signAccessToken = (userId) =>
   jwt.sign({ sub: String(userId), type: 'access' }, process.env.JWT_ACCESS_SECRET, {
     expiresIn: process.env.ACCESS_TOKEN_TTL || '15m',
   });
+  //claiming that the above token is access through type
+  //sub -> meaning is "who is this token about" in the payload
 
 /**
  * We’ll keep refresh tokens as JWTs too (with a different secret).

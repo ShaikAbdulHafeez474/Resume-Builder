@@ -1,14 +1,18 @@
 
-const express = require("express")
+// src/server.js
+require('dotenv').config();
 
-const app = express();
+const { connectDB } = require('./config/db');
+const app = require('./app');
+const { config } = require('./config/index');
 
-app.get('/health',(req,res)=>{
+// Connect to MongoDB
+connectDB();
 
-    res.json({status:'OK',service:'resume-service'});
-})
+// Start server
+app.listen(config.port, () => {
+  console.log(`🚀 Resume service running on port ${config.port}`);
+});
 
-app.listen(5004,()=>{
 
-    console.log("resume-service is running at port 5004");
-})
+
