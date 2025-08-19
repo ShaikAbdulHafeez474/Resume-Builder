@@ -1,6 +1,5 @@
-
-// controllers/template.controller.js
 const Template = require("../models/Template");
+const { renderTemplate } = require("../services/renderer");
 
 /**
  * Get all templates (metadata only)
@@ -70,6 +69,27 @@ exports.deleteTemplate = async (req, res, next) => {
       return res.status(404).json({ message: "Template not found" });
     }
     res.json({ message: "Template deleted successfully" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * Render a resume using a template
+ */
+exports.renderResume = async (req, res, next) => {
+  try {
+    const { templateId, resumeData } = req.body;
+
+    const template = await Template.findById(templateId);
+    if (!template) {
+      return res.status(404).json({ message: "Template not found" });
+    }
+
+    // Use renderer service to merge data with HTML + CSS
+    const renderedHtml = renderTemplate(template.html, template.css, resumeData);
+
+    res.send(renderedHtml);
   } catch (err) {
     next(err);
   }

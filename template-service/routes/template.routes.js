@@ -1,16 +1,17 @@
-
-// routes/template.routes.js
 const express = require("express");
 const router = express.Router();
 const templateController = require("../controllers/template.controller");
-const auth = require("../middleware/auth"); // optional if templates require auth
-const validate = require("../middleware/validate"); // we’ll wire Ajv later
+const auth = require("../middleware/auth");
+const validate = require("../middleware/validate");
 
-// Public: get all templates
+// Public: list all templates
 router.get("/", templateController.getTemplates);
 
 // Public: get a specific template
 router.get("/:id", templateController.getTemplateById);
+
+// ✅ Render resume using a template
+router.post("/render", templateController.renderResume);
 
 // Protected: create template
 router.post("/", auth, templateController.createTemplate);
