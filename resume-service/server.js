@@ -2,9 +2,9 @@
 // src/server.js
 require('dotenv').config();
 
-const { connectDB } = require('./config/db');
+const connectDB  = require('./config/db');
 const app = require('./app');
-const { config } = require('./config/index');
+const config  = require('./config/index');
 
 // Connect to MongoDB
 connectDB();

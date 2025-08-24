@@ -1,8 +1,6 @@
 // src/config/db.js
-// Robust MongoDB connection with retries and event logging for resume-service
-
 const mongoose = require('mongoose');
-const config = require('./index'); // no .js extension needed in CommonJS
+const config = require('./index');
 
 const MAX_RETRIES = 5;
 let retries = 0;
@@ -28,6 +26,7 @@ const connectDB = async () => {
     }
   };
 
+  // 👇 event listeners
   mongoose.connection.on('connected', () => {
     console.log('📡 MongoDB event: connected');
   });
@@ -44,7 +43,8 @@ const connectDB = async () => {
     console.log('♻️ MongoDB event: reconnected');
   });
 
-  connect();
+  // 👇 initial connect
+  await connect();
 };
 
 module.exports = connectDB;

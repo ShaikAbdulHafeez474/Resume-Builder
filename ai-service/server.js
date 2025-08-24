@@ -1,14 +1,21 @@
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
 
-const express = require("express")
+const aiRoutes = require("./routes/ai.routes");
 
-const app = express()
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.use("/", aiRoutes);
 
 app.get('/health',(req,res)=>{
 
-    res.json({status:"OK",service:'AI-Service'});
+     res.json({status:"ok",service:"ai"});
 })
 
-app.listen(5001,()=>{
-
-    console.log("ai-service is running on port 5001");
-})
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => {
+  console.log(`AI Service running on port ${PORT}`);
+});

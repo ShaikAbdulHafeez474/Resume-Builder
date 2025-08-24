@@ -1,50 +1,47 @@
-
-
 services:
   auth-service:
     build: ./auth-service
-    expose : 
-     - "5000"  
-   
+    expose: 
+      - "5000"  
 
   ai-service:
     build: ./ai-service
-    expose : 
-     - "5001"  
-   
+    expose: 
+      - "5001"  
 
   analytics-service:
     build: ./analytics-service
-    expose : 
-     - "5002"  
-   
+    expose: 
+      - "5002"  
+
   resume-service:
     build: ./resume-service
-    expose : 
-     - "5004"  
-    
+    expose: 
+      - "5004"  
 
   template-service:
     build: ./template-service
-    expose : 
-     - "5005"  
-   
+    expose: 
+      - "5005"  
+
   api-gateway:
     build: ./api-gateway
     ports:
       - "5003:5003"  # Only gateway exposed to host
-   
     depends_on:
       - auth-service
       - ai-service
       - analytics-service
       - resume-service
       - template-service
-    
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"   # Expose frontend
-    depends_on:
-      - api-gateway   # Frontend needs API ready
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    container_name: frontend
+    restart: unless-stopped
+    depends_on:
+      - api-gateway
